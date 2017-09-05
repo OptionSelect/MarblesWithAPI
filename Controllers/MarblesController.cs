@@ -10,12 +10,7 @@ namespace MarblesWithAPI.Controllers
     [Route("api/[controller]")]
     public class MarblesController : Controller
     {
-        [Route("/")]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+       
         // GET api/values
         [HttpGet]
         public IEnumerable<MarbleModel> Get()
@@ -47,7 +42,7 @@ namespace MarblesWithAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]string marblecol)
+        public IActionResult Add([FromForm]string marblecol)
         {
             var Marble = new MarbleModel();
             List<MarbleModel> marbles = Marble.MarbleBagGetter();
@@ -56,8 +51,11 @@ namespace MarblesWithAPI.Controllers
                 MarbleColor = marblecol
             };
             marbles.Add(newMarble);
-            return Redirect("/api/marbles");
-        }
-        
+            foreach (var item in marbles)
+            {
+                Console.WriteLine(item);    
+            }
+        return RedirectToAction("Get");
+        }  
     }
 }

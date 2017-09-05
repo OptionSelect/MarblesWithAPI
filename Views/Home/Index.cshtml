@@ -3,8 +3,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Would you like to INSERT A NEW MARBLE‽‽‽</h2>
-<form asp-controller="MarblesController" asp-action="POST" method="POST">
+<h1>Would you like to INSERT A NEW MARBLE‽‽‽</h1>
+
+<form asp-controller="Marbles" asp-action="Add" method="POST">
     <input type="text" name="marblecol" placeholder="Color">
     <button type="submit">Submit</button>
 </form>
