@@ -10,6 +10,12 @@ namespace MarblesWithAPI.Controllers
     [Route("api/[controller]")]
     public class MarblesController : Controller
     {
+        [Route("/")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<MarbleModel> Get()
@@ -19,11 +25,9 @@ namespace MarblesWithAPI.Controllers
             return marbles;    
         }
 
-         [HttpGet("/api/random")]
+        [HttpGet("/api/marbles/random")]
         public MarbleModel GetRandom()
-        {
-            Console.WriteLine("not that");
-            
+        {   
             var Marble = new MarbleModel();
             List<MarbleModel> marbles = Marble.MarbleBagGetter();
 
@@ -41,31 +45,19 @@ namespace MarblesWithAPI.Controllers
             return marbles[id-1];
         }
 
-       
-
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]int id, string color)
+        public IActionResult Post([FromBody]string marblecol)
         {
             var Marble = new MarbleModel();
             List<MarbleModel> marbles = Marble.MarbleBagGetter();
             var newMarble = new MarbleModel{
-                ID = id,
-                MarbleColor = color
+                ID = marbles.Count()+1,
+                MarbleColor = marblecol
             };
             marbles.Add(newMarble);
+            return Redirect("/api/marbles");
         }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

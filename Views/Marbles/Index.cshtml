@@ -1,0 +1,14 @@
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Would you like to INSERT A NEW MARBLE‽‽‽</h2>
+<form asp-controller="MarblesController" asp-action="POST" method="POST">
+    <input type="text" name="marblecol" placeholder="Color">
+    <button type="submit">Submit</button>
+</form>
+
+<p>Click the Button to get a random marble.</p>
+<button type="button" onclick="location.href='@Url.Action("GetRandom", "Marbles")'">Random</button>
+
